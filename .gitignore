@@ -1,20 +1,21 @@
 # Compiled class files
-*.class
+/backend/**/*.class
 
 # Log files
 *.log
 
 # BlueJ files
-*.ctxt
+/backend/**/*.ctxt
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+/backend/.mtj.tmp/
 
 # Package files
-*.jar
-*.war
-*.nar
-*.ear
+/backend/**/*.jar
+/backend/**/*.war
+/backend/**/*.nar
+/backend/**/*.ear
 *.zip
 *.tar.gz
 *.rar
@@ -24,16 +25,16 @@ hs_err_pid*
 replay_pid*
 
 # Node.js
-node_modules/
+/frontend/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Angular
-dist/
-out-tsc/
-*.ngfactory.ts
-*.ngsummary.json
+/frontend/dist/
+/frontend/out-tsc/
+/frontend/*.ngfactory.ts
+/frontend/*.ngsummary.json
 
 # IDEs and editors
 /.idea
@@ -55,36 +56,59 @@ Thumbs.db
 ehthumbs.db
 
 # Spring Boot
-target/
+/backend/target/
 *.war
 *.ear
 
 # IntelliJ
-.idea
+/.idea
 *.iws
 *.iml
 *.ipr
-out/
+/backend/out/
 
 # Eclipse
-.project
-.classpath
-.c9/
-.settings/
-bin/
-tmp/
+/.project
+/.classpath
+/.c9/
+/.settings/
+/bin/
+/tmp/
+
+/backend/.project
+/backend/.classpath
+/backend/.c9/
+/backend/.settings/
+/backend/bin/
+/backend/tmp/
+
+/frontend/.project
+/frontend/.classpath
+/frontend/.c9/
+/frontend/.settings/
+/frontend/bin/
+/frontend/tmp/
 
 # STS
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
+/.apt_generated
+/.classpath
+/.factorypath
+/.project
+/.settings
+/.springBeans
+
+/backend/.apt_generated
+/backend/.classpath
+/backend/.factorypath
+/backend/.project
+/backend/.settings
+/backend/.springBeans
 
 # VS Code
-.vscode/
+/.vscode/
+/frontend/.vscode/
+/backend/.vscode/
 
 # MySQL
-*.sql
-*.db
+/backend/*.sql
+/backend/*.db
