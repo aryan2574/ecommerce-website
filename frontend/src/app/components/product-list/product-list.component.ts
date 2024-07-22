@@ -7,7 +7,7 @@ import { Product } from '../../common/product';
   selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './product-list-table.component.html',
+  templateUrl: './product-list-grid.component.html',
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
