@@ -21,8 +21,17 @@ export class ProductListComponent implements OnInit {
   }
 
   listProducts(): void {
-    this.productService.getProductList().subscribe(data => {
-      this.products = data;
+    this.productService.getProductList().subscribe({
+      next: data => {
+        this.products = data;
+        console.log('Data array:', this.products); // Log the data array
+      },
+      error: err => {
+        console.error('Error occurred: ', err); // Log any error
+      },
+      complete: () => {
+        console.log('Request completed'); // Log completion of the request
+      }
     });
   }
 }
