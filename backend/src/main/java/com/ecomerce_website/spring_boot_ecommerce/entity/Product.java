@@ -8,8 +8,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.util.Date;
 
+// Entity class for Product - Entities are the tables in the database
+// @Data is a Lombok annotation to create all the getters, setters, equals, hash, and toString methods, based on the fields
+// @Entity is a JPA annotation to make this class ready for JPA
+// @Table is a JPA annotation to specify the table to be used for this entity
+// Each field is a column in the table
+
 @Entity
-@Table(name="product")
+@Table(name = "product")
 @Data
 public class Product {
 
@@ -40,14 +46,14 @@ public class Product {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name ="unitsInStock" )
+    @Column(name = "unitsInStock")
     private int unitsInStock;
 
     @Column(name = "dateCreated")
     @CreationTimestamp
     private Date dataCreated;
 
-    @Column(name ="lastUpdated" )
+    @Column(name = "lastUpdated")
     @UpdateTimestamp
     private Date lastUpdated;
 }
