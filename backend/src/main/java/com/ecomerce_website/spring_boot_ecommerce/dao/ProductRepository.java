@@ -17,4 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     //    Spring data rest automatically exposes endpoints for CRUD operations on the entity - localhost:8080/api/products/search/findByCategoryId?id=1
     Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
+
+    Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
 }
