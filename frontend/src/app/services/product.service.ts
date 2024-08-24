@@ -16,7 +16,7 @@ interface GetResponse<T> {
 })
 export class ProductService {
   private readonly BASE_URL = 'http://localhost:8080/api';
-  private readonly PRODUCT_URL = `${this.BASE_URL}/product`;
+  private readonly PRODUCTS_URL = `${this.BASE_URL}/product`;
   private readonly PRODUCT_CATEGORY_URL = `${this.BASE_URL}/product-category`;
 
   constructor(private httpClient: HttpClient) {}
@@ -28,12 +28,12 @@ export class ProductService {
   }
 
   getProductList(categoryId: number): Observable<Product[]> {
-    const searchUrl = `${this.PRODUCT_URL}/search/findByCategoryId?id=${categoryId}`;
+    const searchUrl = `${this.PRODUCTS_URL}/search/findByCategoryId?id=${categoryId}`;
     return this.getItems<Product>(searchUrl, 'product');
   }
 
   searchProducts(keyword: string): Observable<Product[]> {
-    const searchUrl = `${this.PRODUCT_URL}/search/findByNameContaining?name=${keyword}`;
+    const searchUrl = `${this.PRODUCTS_URL}/search/findByNameContaining?name=${keyword}`;
     return this.getItems<Product>(searchUrl, 'product');
   }
 
@@ -42,5 +42,10 @@ export class ProductService {
       this.PRODUCT_CATEGORY_URL,
       'productCategory'
     );
+  }
+
+  getProduct(productId: number): Observable<Product> {
+    const searchURL = `${this.PRODUCTS_URL}/${productId}`;
+    return this.httpClient.get<Product>(searchURL);
   }
 }
