@@ -9,6 +9,12 @@ interface GetResponse<T> {
   _embedded: {
     [key: string]: T[];
   };
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
+  };
 }
 
 @Injectable({
@@ -25,6 +31,19 @@ export class ProductService {
     return this.httpClient
       .get<GetResponse<T>>(url)
       .pipe(map((response) => response._embedded[key]));
+  }
+
+  getProductListPaginate(
+    thePage: number,
+    thePageSize: number,
+    theCategoryId: number
+  ): Observable<Product> {
+    const searchUrl =
+      `${this.PRODUCTS_URL}` +
+      `/search/findByCategoryId?id=${theCategoryId}` +
+      `&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<Product>(searchUrl);
   }
 
   getProductList(categoryId: number): Observable<Product[]> {
