@@ -5,6 +5,8 @@ import { Product } from '../../common/product';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ProductCategory } from '../../common/product-category';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../common/cart-item';
 
 @Component({
   selector: 'app-product-list',
@@ -29,6 +31,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
     private route: ActivatedRoute
   ) {}
 
@@ -51,6 +54,17 @@ export class ProductListComponent implements OnInit {
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     };
+  }
+
+  addToCart(theProduct: Product) {
+    const theCartItem = new CartItem(
+      theProduct.id,
+      theProduct.name,
+      theProduct.imageUrl,
+      theProduct.unitPrice
+    );
+
+    this.cartService.addToCart(theCartItem);
   }
 
   listProducts() {
