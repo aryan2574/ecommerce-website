@@ -33,19 +33,6 @@ export class ProductService {
       .pipe(map((response) => response._embedded[key]));
   }
 
-  getProductListPaginate(
-    thePage: number,
-    thePageSize: number,
-    theCategoryId: number
-  ): Observable<Product> {
-    const searchUrl =
-      `${this.PRODUCTS_URL}` +
-      `/search/findByCategoryId?id=${theCategoryId}` +
-      `&page=${thePage}&size=${thePageSize}`;
-
-    return this.httpClient.get<Product>(searchUrl);
-  }
-
   getProductList(categoryId: number): Observable<Product[]> {
     const searchUrl = `${this.PRODUCTS_URL}/search/findByCategoryId?id=${categoryId}`;
     return this.getItems<Product>(searchUrl, 'product');
@@ -66,5 +53,31 @@ export class ProductService {
   getProduct(productId: number): Observable<Product> {
     const searchURL = `${this.PRODUCTS_URL}/${productId}`;
     return this.httpClient.get<Product>(searchURL);
+  }
+
+  getProductListPaginate(
+    thePage: number,
+    thePageSize: number,
+    theCategoryId: number
+  ): Observable<Product> {
+    const searchUrl =
+      `${this.PRODUCTS_URL}` +
+      `/search/findByCategoryId?id=${theCategoryId}` +
+      `&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<Product>(searchUrl);
+  }
+
+  searchProductsPaginate(
+    thePage: number,
+    thePageSize: number,
+    theKeyword: string
+  ): Observable<Product> {
+    const searchUrl =
+      `${this.PRODUCTS_URL}` +
+      `/search/findByNameContaining?name=${theKeyword}` +
+      `&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<Product>(searchUrl);
   }
 }
