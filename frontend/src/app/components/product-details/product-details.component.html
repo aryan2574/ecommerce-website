@@ -6,7 +6,9 @@
 
     <div class="price">{{ product.unitPrice | currency : "USD" }}</div>
 
-    <a href="#" class="primary-btn">Add to cart</a>
+    <button class="btn btn-primary btn-sm mt-2" (click)="addToCart()">
+      Add to cart
+    </button>
 
     <hr />
     <h4>Description</h4>
