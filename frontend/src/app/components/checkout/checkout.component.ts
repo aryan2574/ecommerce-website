@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  ReactiveFormsModule,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,7 @@ import {
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-  checkoutFormGroup: FormGroup = this.formBuilder.group({});
+  checkoutFormGroup!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -50,8 +50,23 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log('Submitted');
-    console.log(this.checkoutFormGroup.get('customer')?.value);
+  onSubmit(): void {
+    if (this.checkoutFormGroup.valid) {
+      console.log('Form Submitted:', this.checkoutFormGroup.value);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+  copyShippingAddressToBillingAddress(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    const shippingAddress = this.checkoutFormGroup.get('shippingAddress');
+    const billingAddress = this.checkoutFormGroup.get('billingAddress');
+
+    if (isChecked && shippingAddress && billingAddress) {
+      billingAddress.setValue(shippingAddress.value);
+    } else if (billingAddress) {
+      billingAddress.reset();
+    }
   }
 }
