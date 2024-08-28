@@ -369,6 +369,15 @@
           </div>
         </div>
 
+        <!-- Order Details -->
+        <div class="form-area">
+          <h3>Review your order</h3>
+
+          <p>Total Quantity: {{ totalQuantity }}</p>
+          <p>Shipping: Free</p>
+          <p>Total Price: {{ totalPrice | currency : "USD" }}</p>
+        </div>
+
         <!-- Purchase Button -->
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Purchase</button>
