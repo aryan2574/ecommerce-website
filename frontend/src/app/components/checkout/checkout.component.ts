@@ -7,6 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CheckoutFormService } from '../../services/checkout-form.service';
+import { Country } from '../../common/country';
+import { State } from '../../common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -25,6 +27,11 @@ export class CheckoutComponent implements OnInit {
   creditCardMonths: number[] = [];
 
   currentYear: number = new Date().getFullYear();
+
+  countries: Country[] = [];
+
+  shippingAdressStates: State[] = [];
+  billingAdressStates: State[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,6 +80,10 @@ export class CheckoutComponent implements OnInit {
     this.checkoutFromService.getCreditCardYears().subscribe((data: any) => {
       this.creditCardYears = data;
     });
+
+    this.checkoutFromService.getCountries().subscribe((data: any) => {
+      this.countries = data;
+    });
   }
 
   onSubmit(): void {
@@ -117,5 +128,22 @@ export class CheckoutComponent implements OnInit {
       .subscribe((data: any) => {
         this.creditCardMonths = data;
       });
+  }
+
+  getStates(formGroupName: string) {
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+
+    const countryCode = formGroup?.value.country.code;
+
+    this.checkoutFromService.getStates(countryCode).subscribe((data: any) => {
+      console.log(data);
+      if (formGroupName === 'shippingAddress') {
+        this.shippingAdressStates = data;
+      } else {
+        this.billingAdressStates = data;
+      }
+
+      formGroup?.get('state')?.setValue(data[0].name);
+    });
   }
 }

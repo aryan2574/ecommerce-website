@@ -72,9 +72,11 @@
                   id="shippingCountry"
                   class="form-control"
                   aria-label="Shipping Country"
+                  (change)="getStates('shippingAddress')"
                 >
-                  <option value="" disabled selected>Select Country</option>
-                  <!-- Populate with countries -->
+                  <option *ngFor="let country of countries" [ngValue]="country">
+                    {{ country.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -125,8 +127,12 @@
                   class="form-control"
                   aria-label="Shipping State"
                 >
-                  <option value="" disabled selected>Select State</option>
-                  <!-- Populate with states -->
+                  <option
+                    *ngFor="let state of shippingAdressStates"
+                    [ngValue]="state.name"
+                  >
+                    {{ state.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -176,9 +182,11 @@
                   id="billingCountry"
                   class="form-control"
                   aria-label="Billing Country"
+                  (change)="getStates('billingAddress')"
                 >
-                  <option value="" disabled selected>Select Country</option>
-                  <!-- Populate with countries -->
+                  <option *ngFor="let country of countries" [ngValue]="country">
+                    {{ country.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -229,8 +237,12 @@
                   class="form-control"
                   aria-label="Billing State"
                 >
-                  <option value="" disabled selected>Select State</option>
-                  <!-- Populate with states -->
+                  <option
+                    *ngFor="let state of billingAdressStates"
+                    [ngValue]="state.name"
+                  >
+                    {{ state.name }}
+                  </option>
                 </select>
               </div>
             </div>
