@@ -344,6 +344,12 @@
                   <option value="" disabled selected>
                     Select Expiration Month
                   </option>
+                  <option
+                    *ngFor="let month of creditCardMonths"
+                    [value]="month"
+                  >
+                    {{ month }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -362,6 +368,9 @@
                 >
                   <option value="" disabled selected>
                     Select Expiration Year
+                  </option>
+                  <option *ngFor="let year of creditCardYears" [value]="year">
+                    {{ year }}
                   </option>
                 </select>
               </div>
