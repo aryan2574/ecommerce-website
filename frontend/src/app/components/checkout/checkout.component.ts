@@ -10,6 +10,7 @@ import {
 import { CheckoutFormService } from '../../services/checkout-form.service';
 import { Country } from '../../common/country';
 import { State } from '../../common/state';
+import { CheckoutFormValidators } from '../../validators/checkout-form-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -43,10 +44,12 @@ export class CheckoutComponent implements OnInit {
         firstName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          CheckoutFormValidators.notOnlyWhitespace,
         ]),
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          CheckoutFormValidators.notOnlyWhitespace,
         ]),
         email: new FormControl('', [
           Validators.required,
