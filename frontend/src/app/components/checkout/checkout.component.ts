@@ -101,8 +101,11 @@ export class CheckoutComponent implements OnInit {
 
     if (isChecked && shippingAddress && billingAddress) {
       billingAddress.setValue(shippingAddress.value);
+
+      this.billingAdressStates = this.shippingAdressStates;
     } else if (billingAddress) {
       billingAddress.reset();
+      this.billingAdressStates = [];
     }
   }
 
@@ -136,7 +139,6 @@ export class CheckoutComponent implements OnInit {
     const countryCode = formGroup?.value.country.code;
 
     this.checkoutFromService.getStates(countryCode).subscribe((data: any) => {
-      console.log(data);
       if (formGroupName === 'shippingAddress') {
         this.shippingAdressStates = data;
       } else {
