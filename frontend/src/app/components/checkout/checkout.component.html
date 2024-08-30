@@ -269,7 +269,6 @@
                   class="form-control"
                   aria-label="Card Type"
                 >
-                  <option value="" disabled selected>Select Card Type</option>
                   <option value="visa">Visa</option>
                   <option value="mastercard">Mastercard</option>
                 </select>
@@ -341,9 +340,6 @@
                   class="form-control"
                   aria-label="Expiration Month"
                 >
-                  <option value="" disabled selected>
-                    Select Expiration Month
-                  </option>
                   <option
                     *ngFor="let month of creditCardMonths"
                     [value]="month"
@@ -364,11 +360,9 @@
                   formControlName="expirationYear"
                   id="expirationYear"
                   class="form-control"
+                  (change)="handleMonthsAndYears()"
                   aria-label="Expiration Year"
                 >
-                  <option value="" disabled selected>
-                    Select Expiration Year
-                  </option>
                   <option *ngFor="let year of creditCardYears" [value]="year">
                     {{ year }}
                   </option>
