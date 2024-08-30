@@ -129,7 +129,7 @@
                 >
                   <option
                     *ngFor="let state of shippingAdressStates"
-                    [ngValue]="state.name"
+                    [ngValue]="state"
                   >
                     {{ state.name }}
                   </option>
@@ -239,7 +239,7 @@
                 >
                   <option
                     *ngFor="let state of billingAdressStates"
-                    [ngValue]="state.name"
+                    [ngValue]="state"
                   >
                     {{ state.name }}
                   </option>
