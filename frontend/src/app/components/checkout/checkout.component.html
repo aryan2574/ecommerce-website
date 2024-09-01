@@ -120,6 +120,18 @@
                     {{ country.name }}
                   </option>
                 </select>
+                <div
+                  *ngIf="
+                    shippingAddressCountry?.invalid &&
+                    (shippingAddressCountry?.dirty ||
+                      shippingAddressCountry?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="shippingAddressCountry?.errors?.['required']">
+                    Country is required.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -137,6 +149,20 @@
                   placeholder="Enter your street address"
                   aria-label="Shipping Street"
                 />
+                <div
+                  *ngIf="
+                    shippingAddressStreet?.invalid &&
+                    (shippingAddressStreet?.dirty ||
+                      shippingAddressStreet?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="shippingAddressStreet?.errors?.['required'] || shippingAddressStreet?.errors?.['notOnlyWhitespace']"
+                  >
+                    Street is required.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -154,6 +180,19 @@
                   placeholder="Enter your city"
                   aria-label="Shipping City"
                 />
+                <div
+                  *ngIf="
+                    shippingAddressCity?.invalid &&
+                    (shippingAddressCity?.dirty || shippingAddressCity?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="shippingAddressCity?.errors?.['required'] || shippingAddressCity?.errors?.['notOnlyWhitespace']"
+                  >
+                    City is required.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -176,6 +215,18 @@
                     {{ state.name }}
                   </option>
                 </select>
+                <div
+                  *ngIf="
+                    shippingAddressState?.invalid &&
+                    (shippingAddressState?.dirty ||
+                      shippingAddressState?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="shippingAddressState?.errors?.['required']">
+                    State is required.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -193,6 +244,20 @@
                   placeholder="Enter your zip code"
                   aria-label="Shipping Zip Code"
                 />
+                <div
+                  *ngIf="
+                    shippingAddressZipCode?.invalid &&
+                    (shippingAddressZipCode?.dirty ||
+                      shippingAddressZipCode?.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="shippingAddressZipCode?.errors?.['required'] || shippingAddressZipCode?.errors?.['notOnlyWhitespace']"
+                  >
+                    Zipcode is required.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
