@@ -1,3 +1,5 @@
+// Customer.java
+
 package com.ecomerce_website.spring_boot_ecommerce.entity;
 
 import jakarta.persistence.*;
@@ -30,9 +32,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 
-    private void add(Order order) {
-        if(order != null) {
-            if(orders == null){
+    public void add(Order order) {  // Changed to public
+        if (order != null) {
+            if (orders == null) {
                 orders = new HashSet<>();
             }
 
