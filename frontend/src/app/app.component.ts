@@ -6,7 +6,11 @@ import { SearchComponent } from './components/search/search.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { ProductService } from './services/product.service';
-import { OktaAuthModule } from '@okta/okta-angular';
+import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
+import { OktaAuth } from '@okta/okta-auth-js';
+import myAppConfig from './config/my-app-config';
+
+const oktaAuth = new OktaAuth(myAppConfig.oidc);
 
 @Component({
   selector: 'app-root',
@@ -20,7 +24,11 @@ import { OktaAuthModule } from '@okta/okta-angular';
     CartStatusComponent,
     LoginStatusComponent,
   ],
-  providers: [ProductService, OktaAuthModule],
+  providers: [
+    ProductService,
+    OktaAuthStateService,
+    { provide: OKTA_AUTH, useValue: oktaAuth },
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { OKTA_AUTH, OktaAuthModule } from '@okta/okta-angular';
+import { OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import myAppConfig from '../../config/my-app-config';
 
@@ -10,17 +10,15 @@ import myAppConfig from '../../config/my-app-config';
   imports: [],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [OktaAuthModule],
 })
 export class LoginComponent implements OnInit {
   oktaSignIn: any;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: object,
+    @Inject(PLATFORM_ID) private platformId: any,
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      // Only initialize OktaSignIn if running in the browser
       import('@okta/okta-signin-widget').then((OktaSignIn) => {
         this.oktaSignIn = new OktaSignIn.default({
           logo: 'assets/images/logo.png',
