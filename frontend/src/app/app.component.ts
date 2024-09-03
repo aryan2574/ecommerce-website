@@ -4,6 +4,9 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { ProductService } from './services/product.service';
+import { OktaAuthModule } from '@okta/okta-angular';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +18,11 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
     ProductCategoryMenuComponent,
     SearchComponent,
     CartStatusComponent,
+    LoginStatusComponent,
   ],
+  providers: [ProductService, OktaAuthModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'frontend';
