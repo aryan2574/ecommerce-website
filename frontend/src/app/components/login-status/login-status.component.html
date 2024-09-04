@@ -17,4 +17,12 @@
   <button *ngIf="isAuthenticated" (click)="logout()" class="btn btn-secondary">
     Logout
   </button>
+
+  <button
+    *ngIf="isAuthenticated"
+    routerLink="/members"
+    class="btn btn-secondary ml-5"
+  >
+    Member
+  </button>
 </div>
