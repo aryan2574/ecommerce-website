@@ -7,7 +7,6 @@ import myAppConfig from '../../config/my-app-config';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -17,26 +16,24 @@ export class LoginComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     @Inject(OKTA_AUTH) private oktaAuth: OktaAuth
-  ) {
-    if (isPlatformBrowser(this.platformId)) {
-      import('@okta/okta-signin-widget').then((OktaSignIn) => {
-        this.oktaSignIn = new OktaSignIn.default({
-          logo: 'assets/images/logo.png',
-          baseUrl: myAppConfig.oidc.issuer.split('/oauth2')[0],
-          clientId: myAppConfig.oidc.clientId,
-          redirectUri: myAppConfig.oidc.redirectUri,
-          authParams: {
-            pkce: true,
-            issuer: myAppConfig.oidc.issuer,
-            scopes: myAppConfig.oidc.scopes,
-          },
-        });
-      });
-    }
-  }
+  ) {}
 
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId) && this.oktaSignIn) {
+  async ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      const OktaSignIn = (await import('@okta/okta-signin-widget')).default;
+
+      this.oktaSignIn = new OktaSignIn({
+        logo: 'assets/images/logo.png',
+        baseUrl: myAppConfig.oidc.issuer.split('/oauth2')[0],
+        clientId: myAppConfig.oidc.clientId,
+        redirectUri: myAppConfig.oidc.redirectUri,
+        authParams: {
+          pkce: true,
+          issuer: myAppConfig.oidc.issuer,
+          scopes: myAppConfig.oidc.scopes,
+        },
+      });
+
       this.oktaSignIn.remove();
 
       this.oktaSignIn.renderEl(

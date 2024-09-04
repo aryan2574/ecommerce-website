@@ -6,11 +6,15 @@
     Welcome back, {{ userFullName }}!
   </div>
 
-  <button *ngIf="!isAuthenticated" routerLink="/login" class="security-btn">
+  <button
+    *ngIf="!isAuthenticated"
+    routerLink="/login"
+    class="btn btn-secondary"
+  >
     Login
   </button>
 
-  <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn">
+  <button *ngIf="isAuthenticated" (click)="logout()" class="btn btn-secondary">
     Logout
   </button>
 </div>
