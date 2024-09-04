@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { CartItem } from '../common/cart-item';
 import { BehaviorSubject } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,24 @@ export class CartService {
   totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor() {}
+  storage: Storage | undefined;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      // this.storage = sessionStorage;
+      this.storage = localStorage;
+      const data = this.storage
+        ? (JSON.parse(
+            this.storage.getItem('cartItems') as string
+          ) as CartItem[])
+        : [];
+
+      if (data) {
+        this.cartItems = data;
+        this.computeCartTotals();
+      }
+    }
+  }
 
   addToCart(theCartItem: CartItem) {
     // Check if the item already exists in the cart
@@ -74,6 +92,13 @@ export class CartService {
 
     // Log cart data for debugging purposes
     this.logCartData(totalPriceValue, totalQuantityValue);
+
+    // Persist cart data
+    this.persistCartItems();
+  }
+
+  persistCartItems() {
+    this.storage?.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
