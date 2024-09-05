@@ -1,9 +1,6 @@
 package com.ecomerce_website.spring_boot_ecommerce.config;
 
-import com.ecomerce_website.spring_boot_ecommerce.entity.Country;
-import com.ecomerce_website.spring_boot_ecommerce.entity.Product;
-import com.ecomerce_website.spring_boot_ecommerce.entity.ProductCategory;
-import com.ecomerce_website.spring_boot_ecommerce.entity.State;
+import com.ecomerce_website.spring_boot_ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,8 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
 
+
+
         HttpMethod[] theUnsupportedActions = {HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.PATCH};
 
         disableHttpMethods(config.getExposureConfiguration().forDomainType(Product.class), theUnsupportedActions);
@@ -45,6 +44,8 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(config.getExposureConfiguration().forDomainType(Country.class), theUnsupportedActions);
 
         disableHttpMethods(config.getExposureConfiguration().forDomainType(State.class), theUnsupportedActions);
+
+        disableHttpMethods(config.getExposureConfiguration().forDomainType(Order.class), theUnsupportedActions);
 
         // Call an internal helper method to expose the ids
         exposeIds(config);
