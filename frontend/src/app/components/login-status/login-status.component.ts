@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
@@ -14,12 +14,19 @@ export class LoginStatusComponent implements OnInit {
   isAuthenticated: boolean = false;
   userFullName: string = '';
 
+  storage: Storage | undefined;
+
   constructor(
     @Inject(OktaAuthStateService) private oktaAuthService: OktaAuthStateService,
-    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth
+    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.storage = sessionStorage;
+    }
+
     this.oktaAuthService.authState$.subscribe((result) => {
       this.isAuthenticated = result.isAuthenticated!;
       this.getUserDetails();
@@ -30,6 +37,11 @@ export class LoginStatusComponent implements OnInit {
     if (this.isAuthenticated) {
       this.oktaAuth.getUser().then((res) => {
         this.userFullName = res.name as string;
+
+        // Save the user's information in the session storage
+        const theEmail = res.email as string;
+
+        this.storage?.setItem('userEmail', JSON.stringify(theEmail));
       });
     }
   }

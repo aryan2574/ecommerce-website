@@ -25,4 +25,12 @@
   >
     Member
   </button>
+
+  <button
+    *ngIf="isAuthenticated"
+    routerLink="/order-history"
+    class="btn security-btn btn-secondary ml-5"
+  >
+    Orders
+  </button>
 </div>
