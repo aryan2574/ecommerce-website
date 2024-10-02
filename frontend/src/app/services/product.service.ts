@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
+import { environment } from '../../environments/environment';
 
 interface GetResponse<T> {
   _embedded: {
@@ -21,7 +22,7 @@ interface GetResponse<T> {
   providedIn: 'root',
 })
 export class ProductService {
-  private readonly BASE_URL = 'http://localhost:8080/api';
+  private readonly BASE_URL = environment.ayushEcommerceApiUrl;
   private readonly PRODUCTS_URL = `${this.BASE_URL}/product`;
   private readonly PRODUCT_CATEGORY_URL = `${this.BASE_URL}/product-category`;
 

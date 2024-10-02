@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { Country } from '../common/country';
 import { State } from '../common/state';
+import { environment } from '../../environments/environment';
 
 interface GetResponseCountries {
   _embedded: {
@@ -20,8 +21,8 @@ interface GetResponseStates {
   providedIn: 'root',
 })
 export class CheckoutFormService {
-  private countriesUrl = 'http://localhost:8080/api/countries';
-  private statesUrl = 'http://localhost:8080/api/states';
+  private countriesUrl = environment.ayushEcommerceApiUrl + '/countries';
+  private statesUrl = environment.ayushEcommerceApiUrl + '/states';
 
   constructor(private httpClient: HttpClient) {}
 
