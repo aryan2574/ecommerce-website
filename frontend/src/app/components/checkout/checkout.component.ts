@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import { Order } from '../../common/order';
 import { OrderItem } from '../../common/order-item';
 import { Purchase } from '../../common/purchase';
+import { PaymentInfo } from '../../common/payment-info';
 
 @Component({
   selector: 'app-checkout',
@@ -40,6 +41,8 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
 
   storage: Storage | undefined;
+
+  PaymentInfo!: PaymentInfo;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -226,6 +229,12 @@ export class CheckoutComponent implements OnInit {
     // Populate purchase - order and orderItems
     purchase.order = order;
     purchase.orderItems = orderItems;
+
+    this.PaymentInfo = new PaymentInfo(
+      this.totalPrice,
+      'USD',
+      this.checkoutFormGroup.get('customer.email')?.value
+    );
 
     // Call REST API via the CheckoutService
     this.checkoutService.placeOrder(purchase).subscribe({
