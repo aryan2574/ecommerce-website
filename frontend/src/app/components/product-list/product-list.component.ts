@@ -7,6 +7,7 @@ import { ProductCategory } from '../../common/product-category';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../common/cart-item';
+import { TealiumTrackingService } from '../../services/tealium-tracking.service.ts.service';
 
 @Component({
   selector: 'app-product-list',
@@ -32,13 +33,22 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tealiumTracking: TealiumTrackingService
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.listProducts();
     });
+
+    const productData = {
+      page_name: 'product-list',
+      page_type: 'category',
+      page_category: this.currentCategoryName,
+      page_number: this.thePageNumber,
+    };
+    this.tealiumTracking.trackPageView(productData);
   }
 
   updatePageSize(pageSize: string) {
